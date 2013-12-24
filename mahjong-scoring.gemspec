@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'mahjong/scoring/version'
+require 'mahjong_scoring/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "mahjong-scoring"
-  spec.version       = Mahjong::Scoring::VERSION
+  spec.version       = MahjongScoring::VERSION
   spec.authors       = ["Janko Luin", "Jessica Hanmeier"]
   spec.email         = ["janko@luin.se", "jessica@esperanto.se"]
   spec.description   = %q{Calculate the score of a Mahjong hand}
