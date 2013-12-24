@@ -1,6 +1,4 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "mahjong/scoring"
+require "spec_helper"
 
 describe Mahjong::Scoring, "Nine Gates" do
   it "is worth 88 points" do
