@@ -100,3 +100,34 @@ describe "North Wind tile" do
   it_behaves_like "wind tile", symbol: "N", expected_type: :north_wind
   it_behaves_like "wind tile", symbol: "北", expected_type: :north_wind
 end
+
+describe Tile, "comparisons" do
+  it "is equal when two tiles have the same value" do
+    Tile.new("5•").should == Tile.new("5•")
+    Tile.new("E").should == Tile.new("E")
+  end
+
+  it "is not equal for different ranks" do
+    Tile.new("1•").should_not == Tile.new("2•")
+  end
+
+  it "is not equal for different suits" do    
+    Tile.new("3#").should_not == Tile.new("3/")
+    Tile.new("7#").should_not == Tile.new("N")
+  end
+
+  it "orders tiles by rank within suits" do
+    tiles = [
+      Tile.new("3/"), Tile.new("9/"),
+      Tile.new("3•"),
+      Tile.new("3/"), Tile.new("1/")
+    ]
+    tiles.sort.map(&:to_s).should == %w[1/ 3/ 3/ 9/ 3•]
+  end
+end
+
+describe Tile, "arithmetic" do
+  it "adds to the rank" do
+    (Tile.new("3•") + 4).should == Tile.new("7•")
+  end
+end

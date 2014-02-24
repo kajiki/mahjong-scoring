@@ -42,6 +42,27 @@ class Tile
 
   def to_s() @string_representation end
 
+  def ==(other_tile)
+    other_tile.type == self.type && other_tile.rank == self.rank
+  end
+  alias :eql? :==
+
+  def <=>(other_tile)
+    if type != other_tile.type
+      type <=> other_tile.type
+    else
+      rank <=> other_tile.rank
+    end
+  end
+
+  def +(number)
+    Tile.new((rank + number).to_s + to_s[1])
+  end
+
+  def hash
+    to_s.hash
+  end
+
   private
   def numerical_rank(candidate)
     number = candidate.to_i
