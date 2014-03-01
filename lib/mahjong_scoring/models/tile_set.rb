@@ -1,6 +1,14 @@
 class TileSet
   attr_reader :tiles
 
+  def self.wrap(object)
+    if object.kind_of?(TileSet)
+      object
+    else
+      new(object)
+    end
+  end
+
   def initialize(string_or_array)
     if string_or_array.kind_of?(String)
       @tiles = tiles_from_string(string_or_array).sort
@@ -15,6 +23,10 @@ class TileSet
     elsif kong? then :kong
     elsif chow? then :chow
     end
+  end
+
+  def ==(other_tileset)
+    tiles == other_tileset.tiles
   end
 
   private
