@@ -15,6 +15,12 @@ describe TileSet, "constructor" do
 end
 
 describe TileSet, "#type" do
+  it "is :pair for two identical tiles" do
+    TileSet.new("8/ 8/").type.should == :pair
+    TileSet.new("8/ 9/").type.should_not == :pair
+    TileSet.new("8/ 8•").type.should_not == :pair
+  end
+
   it "is :pung for three identical tiles" do
     TileSet.new("8/ 8/ 8/").type.should == :pung
     TileSet.new("8/ 8/ 9/").type.should_not == :pung
