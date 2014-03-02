@@ -3,19 +3,13 @@ require "spec_helper"
 describe Rules::AllPungs do
   subject { described_class }
 
-  it "is worth 6 points" do
-    Rules::AllPungs.score.should == 6
-  end
+  its(:score) { should == 6 }
 
-  describe "with a standard hand having four pungs" do
-    it { should match_hand ["1• 1• 1•", "2/ 2/ 2/", "3• 3• 3•", "S S S", "4# 4#"] }
-  end
+  it "matches a standard hand with four pungs/kongs" do
+    should match_hand ["1• 1• 1•", "2/ 2/ 2/", "3• 3• 3•", "S S S", "4# 4#"]
+    should match_hand ["1• 1• 1•", "2/ 2/ 2/ 2/", "3• 3• 3•", "S S S", "4# 4#"]
 
-  describe "with a standard hand having four pungs/kongs" do
-    it { should match_hand ["1• 1• 1•", "2/ 2/ 2/ 2/", "3• 3• 3•", "S S S", "4# 4#"] }
-  end
-
-  describe "with a non-matching hand" do
-    it { should_not match_hand ["1/ 1/ 1/", "2/ 2/ 2/", "3/ 3/ 3/", "1/ 2/ 3/", "E E"] }
+    should_not match_hand ["1• 1• 1•", "2/ 2/ 2/ 2/", "3• 3• 3•", "S S S"]
+    should_not match_hand ["1/ 1/ 1/", "2/ 2/ 2/", "3/ 3/ 3/", "1/ 2/ 3/", "E E"]
   end
 end
