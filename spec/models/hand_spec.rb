@@ -32,8 +32,14 @@ describe Hand do
       TileSet.new("4# 5# 6#"), TileSet.new("7# 8# 9#")
     ]
   end
-  
+
   it "can return all pair tilesets" do
     Hand.new(["1• 1• 1•", "2• 2•"]).pairs.should == [TileSet.new("2• 2•")]
+  end
+
+  it "can return all tiles" do
+    Hand.new(["7/ 7/", "8/ 8/"]).tiles.should == [
+      Tile.new("7/"), Tile.new("7/"), Tile.new("8/"), Tile.new("8/")
+    ]
   end
 end
