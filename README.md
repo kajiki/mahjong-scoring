@@ -18,7 +18,9 @@ Tile notation
 
 # winds
 "E W N S"
+"東 西 北 南"
 
 # dragons
+"C F B"
 "中 發 白"
 ```
