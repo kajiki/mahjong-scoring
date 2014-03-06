@@ -36,6 +36,7 @@ class Tile
   end
 
   def terminal?() rank == 1 or rank == 9 end
+  def suited?() not honor? end
   def honor?() dragon? or wind? end
   def dragon?() !!@dragon end
   def wind?() !!@wind end
