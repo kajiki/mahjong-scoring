@@ -25,6 +25,22 @@ class TileSet
     end
   end
 
+  def tile_type
+    tiles.first.type if (pair? or pung? or kong? or chow?)
+  end
+
+  def rank
+    tiles.first.rank if (pair? or pung? or kong? or chow?)
+  end
+
+  def dragon?
+    tiles.first.dragon?
+  end
+
+  def wind?
+    tiles.first.wind?
+  end
+
   def ==(other_tileset)
     tiles == other_tileset.tiles
   end

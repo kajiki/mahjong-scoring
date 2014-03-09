@@ -63,6 +63,33 @@ describe TileSet, "#type" do
   end
 end
 
+describe TileSet, "tile related methods" do
+  it "references the type of its tiles" do
+    TileSet.new("1• 1• 1•").tile_type.should == :circle
+    TileSet.new("1# 1# 1#").tile_type.should == :character
+    TileSet.new("1/ 1/").tile_type.should == :bamboo
+    TileSet.new("E E E").tile_type.should == :east_wind
+
+    TileSet.new("1/ 1/ 1•").tile_type.should_not == :bamboo
+  end
+
+  it "recieves a computed rank from its tiles" do
+    TileSet.new("1• 1• 1•").rank.should == 1
+    TileSet.new("3• 4• 5•").rank.should == 3
+    TileSet.new("S S S").rank.should be_nil
+
+    TileSet.new("1• 1• 2•").rank.should_not == 1
+  end
+
+  it "is dragon or wind if its tiles are such" do
+    TileSet.new("C C C").should be_dragon
+    TileSet.new("S S S").should be_wind
+
+    TileSet.new("4/ 4/ 4/").should_not be_dragon
+    TileSet.new("8# 8# 8#").should_not be_wind
+  end
+end
+
 describe TileSet, "comparisons" do
   it "is equal when the tiles have the same value" do
     TileSet.new("2/ 2/").should == TileSet.new("2/ 2/")
