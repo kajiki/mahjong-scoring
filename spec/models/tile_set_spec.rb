@@ -61,6 +61,15 @@ describe TileSet, "#type" do
     TileSet.new("1# 1# 3#").type.should_not == :chow
     TileSet.new("1# 2# 3•").type.should_not == :chow
   end
+
+  it "is :knitted if either 1-4-7, 2-5-8 or 3-6-9 of same suit" do
+    TileSet.new("1# 4# 7#").type.should == :knitted
+    TileSet.new("2/ 5/ 8/").type.should == :knitted
+    TileSet.new("3• 6• 9•").type.should == :knitted
+    TileSet.new("4• 7• 1•").type.should == :knitted
+    TileSet.new("2# 6# 8#").type.should_not == :knitted
+    TileSet.new("3/ 6/ 9#").type.should_not == :knitted
+  end
 end
 
 describe TileSet, "tile related methods" do

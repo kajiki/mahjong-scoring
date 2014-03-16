@@ -1,4 +1,11 @@
 class TileSet
+
+  KNITTED_SETS = [
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9]
+      ].freeze
+
   attr_reader :tiles
 
   def self.wrap(object)
@@ -22,15 +29,16 @@ class TileSet
     elsif pung? then :pung
     elsif kong? then :kong
     elsif chow? then :chow
+    elsif knitted? then :knitted
     end
   end
 
   def tile_type
-    tiles.first.type if (pair? or pung? or kong? or chow?)
+    tiles.first.type if (pair? or pung? or kong? or chow? or knitted?)
   end
 
   def rank
-    tiles.first.rank if (pair? or pung? or kong? or chow?)
+    tiles.first.rank if (pair? or pung? or kong? or chow? or knitted?)
   end
 
   def dragon?
@@ -41,21 +49,29 @@ class TileSet
     tiles.first.wind?
   end
 
+  def suited?
+    tiles.first.suited?
+  end
+
   def ==(other_tileset)
     tiles == other_tileset.tiles
   end
 
+  def inspect
+    "#<#{self.class.name}: #{tiles.map(&:to_s).join(" ")}>"
+  end
+
   private
   def pair?
-    tiles.count == 2 and tiles.uniq.count == 1
+    tiles.count == 2 and same_value?
   end
 
   def pung?
-    tiles.count == 3 and tiles.uniq.count == 1
+    tiles.count == 3 and same_value?
   end
 
   def kong?
-    tiles.count == 4 and tiles.uniq.count == 1
+    tiles.count == 4 and same_value?
   end
 
   def chow?
@@ -66,9 +82,22 @@ class TileSet
     ]
   end
 
+  def knitted?
+    single_type? and suited? and
+    KNITTED_SETS.include? tiles.map(&:rank)
+  end
+
   def tiles_from_string(string)
     string.split(/\s+/).map do |tile|
       Tile.new(tile)
     end
+  end
+
+  def single_type?
+    tiles.map(&:type).uniq.count == 1
+  end
+
+  def same_value?
+    tiles.uniq.count == 1
   end
 end
