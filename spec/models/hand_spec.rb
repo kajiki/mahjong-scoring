@@ -37,6 +37,10 @@ describe Hand do
     Hand.new(["1• 1• 1•", "2• 2•"]).pairs.should == [TileSet.new("2• 2•")]
   end
 
+  it "can return all knitted tilesets" do
+    Hand.new(["1• 4• 7•", "3• 3• 3•"]).knitted_sets.should == [TileSet.new("1• 4• 7•")]
+  end
+
   it "can return all tiles" do
     Hand.new(["7/ 7/", "8/ 8/"]).tiles.should == [
       Tile.new("7/"), Tile.new("7/"), Tile.new("8/"), Tile.new("8/")

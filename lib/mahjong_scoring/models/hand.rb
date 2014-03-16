@@ -11,6 +11,8 @@ class Hand
   def kongs() tilesets.select { |tileset| tileset.type == :kong } end
   def chows() tilesets.select { |tileset| tileset.type == :chow } end
   def pairs() tilesets.select { |tileset| tileset.type == :pair } end
+    
+  def knitted_sets() tilesets.select { |tileset| tileset.type == :knitted } end
 
   def tiles
     tilesets.map(&:tiles).flatten
