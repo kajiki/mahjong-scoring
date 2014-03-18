@@ -4,7 +4,7 @@ module Rules
 
     def self.match?(hand)
       super and
-      hand.tiles.select{ |t| t.rank == 5 }.map(&:type).uniq.count == 3
+      hand.tilesets.all? { |tileset| tileset.tiles.map(&:rank).include?(5) }
     end
   end
 end
